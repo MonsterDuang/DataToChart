@@ -1,6 +1,6 @@
-const { app, Browserwindow } = require("electron");
-const createwindow = () => {
-  const win = new Browserwindow({
+const { app, BrowserWindow } = require("electron");
+const createWindow = () => {
+  const win = new BrowserWindow({
     width: 1200,
     height: 800,
   });
@@ -11,9 +11,9 @@ const createwindow = () => {
 app.whenReady().then(() => {
   createWindow();
   app.on("activate", () => {
-    if (Browserindow.getAllwindows().length === 0) createwindow();
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
-app.on("window-al1-closed", () => {
+app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
