@@ -5,7 +5,9 @@
   "author": "Monster",
   "description": "A desktop application for converting data to charts",
   "scripts": {
-    "dev:ele": "electron .",
+    "dev:electron": "electron .",
+    "electron": "wait-on tcp:5173 && electron .",
+    "serve:electron": "concurrently -k \"npm run dev:h5\" \"npm run electron\"",
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
     "dev:app-ios": "uni -p app-ios",
@@ -64,7 +66,9 @@
     "@dcloudio/uni-cli-shared": "3.0.0-3071120230427001",
     "@dcloudio/uni-stacktracey": "3.0.0-3071120230427001",
     "@dcloudio/vite-plugin-uni": "3.0.0-3071120230427001",
+    "concurrently": "^8.1.0",
     "electron": "^25.0.0",
-    "vite": "4.1.4"
+    "vite": "4.1.4",
+    "wait-on": "^7.0.1"
   }
 }
