@@ -8,8 +8,8 @@ const createWindow = () => {
   // 注意: 该路径为uniapp 发行H5/PC后生成的文件路径
   // win.loadFile("dist/build/h5/index.html");
 
-  // 注意: 该路径为 npm run dev:h5 运行后开启的本地服务 根据实际情况修改
-  win.loadURL("http://localhost:5173"); // 有改动 新增
+  // 注意: 该路径为 npm run serve:electron 运行后开启的本地服务 根据实际情况修改
+  win.loadURL("http://localhost:5173");
 
   // win.webContents.openDevTooLs() // 开启调试工具
 };
