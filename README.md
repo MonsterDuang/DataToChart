@@ -14,7 +14,7 @@
 ### 1.安装依赖
   npm install
  
-### 2.执行运行
+### 2.运行服务
   npm run serve:electron
   
 ### 3.根据运行结果，修改端口
