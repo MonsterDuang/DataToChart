@@ -75,7 +75,7 @@ uni-page-body {
       height: 30upx;
       position: absolute;
       transition: all 1s;
-      border:  0 solid deepskyblue;
+      border: 0 solid deepskyblue;
     }
     &::after {
       top: 0;
@@ -102,6 +102,7 @@ uni-page-body {
     view {
       font-size: 60upx;
       line-height: 50upx;
+      margin-bottom: 10upx;
     }
     text {
       line-height: 40upx;
