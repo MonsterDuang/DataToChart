@@ -16,10 +16,3 @@
  
 ### 2.运行服务
   npm run serve:electron
-  
-### 3.根据运行结果，修改端口
-![修改端口](https://github.com/MonsterDuang/DataToChart/assets/31094588/b5e46160-9625-4a05-bc05-1c252426f234)
-
-### 4.在终端执行 CTRL + C 结束运行
-
-### 5.再次执行第二步，即可。
