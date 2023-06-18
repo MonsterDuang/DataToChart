@@ -75,18 +75,19 @@ uni-page-body {
       height: 30upx;
       position: absolute;
       transition: all 1s;
+      border:  0 solid black;
     }
     &::after {
-      top: 0upx;
-      left: 0upx;
-      border-top: 10upx solid black;
-      border-left: 10upx solid black;
+      top: 0;
+      left: 0;
+      border-top-width: 10upx;
+      border-left-width: 10upx;
     }
     &::before {
-      bottom: 0upx;
-      right: 0upx;
-      border-bottom: 10upx solid black;
-      border-right: 10upx solid black;
+      bottom: 0;
+      right: 0;
+      border-bottom-width: 10upx;
+      border-right-width: 10upx;
     }
     &:hover {
       color: deepskyblue;
