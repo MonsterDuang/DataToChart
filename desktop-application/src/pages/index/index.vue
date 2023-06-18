@@ -5,9 +5,7 @@
       <view>＋</view>
       <text>请选择Excel文件</text>
     </view>
-    <view class="content" v-else>
-      
-    </view>
+    <view class="content" v-else> </view>
   </view>
 </template>
 
@@ -56,8 +54,8 @@ uni-page-body {
   justify-content: center;
   align-items: center;
   .upload-btn {
-    width: 400upx;
-    height: 300upx;
+    width: 500upx;
+    height: 200upx;
     color: #000;
     margin: 10upx;
     display: flex;
@@ -65,14 +63,39 @@ uni-page-body {
     align-items: center;
     justify-content: center;
     background: #eee;
-    border-radius: 10upx;
+    border-radius: 20upx;
     cursor: pointer;
     position: relative;
-    top: 0;
-    transition: top 0.5s;
-    box-shadow: 0 20upx 30upx -10upx rgba(0, 0, 0, 0.10);
-    &:hover{
-      top: -15upx;
+    transition: all 1s;
+    box-shadow: 0 20upx 30upx -10upx rgba(0, 0, 0, 0.1);
+    &::after,
+    &::before {
+      content: " ";
+      width: 30upx;
+      height: 30upx;
+      position: absolute;
+      transition: all 1s;
+    }
+    &::after {
+      top: 0upx;
+      left: 0upx;
+      border-top: 10upx solid black;
+      border-left: 10upx solid black;
+    }
+    &::before {
+      bottom: 0upx;
+      right: 0upx;
+      border-bottom: 10upx solid black;
+      border-right: 10upx solid black;
+    }
+    &:hover {
+      color: deepskyblue;
+      &::before,
+      &::after {
+        width: 100%;
+        height: 100%;
+        border-color: deepskyblue;
+      }
     }
     view {
       font-size: 60upx;
