@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Menu } = require("electron");
 Menu.setApplicationMenu(null); // 去除顶部菜单栏
+process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 1200,
@@ -12,7 +13,7 @@ const createWindow = () => {
   // 注意: 该路径为 npm run serve:electron 运行后开启的本地服务 根据实际情况修改
   win.loadURL("http://localhost:22927");
 
-  win.webContents.openDevTools() // 开启调试工具
+  win.webContents.openDevTools(); // 开启调试工具
 };
 app.whenReady().then(() => {
   createWindow();

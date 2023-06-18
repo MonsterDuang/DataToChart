@@ -56,13 +56,13 @@ uni-page-body {
   .upload-btn {
     width: 500upx;
     height: 200upx;
-    color: #000;
+    color: deepskyblue;
     margin: 10upx;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #eee;
+    background: #000;
     border-radius: 20upx;
     cursor: pointer;
     position: relative;
@@ -75,7 +75,7 @@ uni-page-body {
       height: 30upx;
       position: absolute;
       transition: all 1s;
-      border:  0 solid black;
+      border:  0 solid deepskyblue;
     }
     &::after {
       top: 0;
@@ -90,16 +90,18 @@ uni-page-body {
       border-right-width: 10upx;
     }
     &:hover {
-      color: deepskyblue;
+      color: red;
+      background-color: yellow;
       &::before,
       &::after {
         width: 100%;
         height: 100%;
-        border-color: deepskyblue;
+        border-color: red;
       }
     }
     view {
       font-size: 60upx;
+      line-height: 50upx;
     }
     text {
       line-height: 40upx;

@@ -26,5 +26,6 @@ export default {
 
 #app {
   font-family: "Staatliches";
+  letter-spacing: 10upx;
 }
 </style>
