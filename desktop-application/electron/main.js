@@ -9,7 +9,7 @@ const createWindow = () => {
   // win.loadFile("dist/build/h5/index.html");
 
   // 注意: 该路径为 npm run serve:electron 运行后开启的本地服务 根据实际情况修改
-  win.loadURL("http://localhost:5173");
+  win.loadURL("http://localhost:22927");
 
   // win.webContents.openDevTooLs() // 开启调试工具
 };
