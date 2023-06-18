@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu } = require("electron");
+Menu.setApplicationMenu(null); // 去除顶部菜单栏
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 1200,
