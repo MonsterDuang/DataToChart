@@ -25,12 +25,20 @@ export default {
         type: "all",
         extension: [".xls", "xlsx"],
         success: (res) => {
-          console.log("成功：", res);
+          this.analyzeData(res.tempFiles[0]);
         },
         fail: (err) => {
           console.log("失败：", err);
         },
       });
+    },
+    analyzeData(file) {
+      const reader = new FileReader();
+      reader.readAsBinaryString(file);
+      reader.onload = (e) => {
+        const workbook = XLSX.read(e.target.result, { type: "binary" });
+        console.log(workbook);
+      };
     },
   },
 };

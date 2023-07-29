@@ -1,5 +1,5 @@
 {
-  "name": "data-to-chart",
+  "name": "excel-to-chart",
   "version": "0.0.0",
   "main": "electron/main.js",
   "author": "Monster",
