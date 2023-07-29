@@ -24,8 +24,7 @@ export default {
   src: url("./src/static/font/Staatliches.ttf");
 }
 
-#app {
+.count {
   font-family: "Staatliches";
-  letter-spacing: 10upx;
 }
 </style>

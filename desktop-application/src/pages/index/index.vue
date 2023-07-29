@@ -5,16 +5,18 @@
       <view>＋</view>
       <text>请选择Excel文件</text>
     </view>
-    <view class="content" v-else> </view>
+    <view class="content" v-else>{{ fileName }}</view>
   </view>
 </template>
 
 <script>
 const app = getApp();
+import * as XLSX from "xlsx";
 export default {
   data() {
     return {
       isUpload: false,
+      fileName: "",
     };
   },
   onLoad() {},
@@ -25,20 +27,38 @@ export default {
         type: "all",
         extension: [".xls", "xlsx"],
         success: (res) => {
-          this.analyzeData(res.tempFiles[0]);
+          this.analyzeFile(res.tempFiles[0]);
         },
         fail: (err) => {
           console.log("失败：", err);
         },
       });
     },
-    analyzeData(file) {
+    // 解析文件
+    analyzeFile(file) {
+      let allSheetsData = {};
+      this.fileName = file.name;
       const reader = new FileReader();
       reader.readAsBinaryString(file);
       reader.onload = (e) => {
-        const workbook = XLSX.read(e.target.result, { type: "binary" });
-        console.log(workbook);
+        const workbook = XLSX.read(e.target.result, { type: "binary" }); // 存放excel的所有基本信息
+        const sheetList = workbook.SheetNames; // excel表格下方的tab
+        const sheet2JSONOpts = { defval: "" };
+        sheetList.forEach((x) => {
+          const worksheet = workbook.Sheets[x];
+          const sheetData = XLSX.utils.sheet_to_json(
+            worksheet,
+            sheet2JSONOpts // sheet2JSONOpts参数是想为空的列表默认传参为""
+          ); // 每个sheet以json数组形式输出
+          allSheetsData[x] = sheetData;
+          this.isUpload = true;
+        });
+        this.analyzeData(allSheetsData);
       };
+    },
+    // 解析从文件得到的数据 data={Sheet1: [{姓名: "张三", ...}, ...], Sheet2: [...], Sheet3: [...], ...}
+    analyzeData(data) {
+      console.log(data);
     },
   },
 };
@@ -120,7 +140,7 @@ uni-page-body {
 }
 .container {
   .content {
-    padding: 30upx;
+    padding: 20upx;
   }
 }
 </style>
