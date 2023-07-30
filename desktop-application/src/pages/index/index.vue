@@ -5,23 +5,35 @@
       <view>＋</view>
       <text>请选择Excel文件</text>
     </view>
-    <view class="content" v-else>{{ fileName }}</view>
+    <view class="content" v-else>
+      <h1 @click="isUpload = false">{{ fileName }}</h1>
+      <template v-for="item in tableData" :key="item">
+        <div v-if="item.has" style="margin-top: 20px">
+          <h2>{{ item.sheetName }}</h2>
+          <Table :columns="item.columns" :data="item.data"></Table>
+        </div>
+      </template>
+    </view>
   </view>
 </template>
 
 <script>
 const app = getApp();
 import * as XLSX from "xlsx";
+import Pinyin from "js-pinyin";
+Pinyin.setOptions({ checkPolyphone: false, charCase: 1 });
 export default {
   data() {
     return {
       isUpload: false,
       fileName: "",
+      tableData: [],
     };
   },
   onLoad() {},
   methods: {
     chooseFile() {
+      uni.showLoading({ title: "上传中..." });
       uni.chooseFile({
         count: 1,
         type: "all",
@@ -52,13 +64,57 @@ export default {
           ); // 每个sheet以json数组形式输出
           allSheetsData[x] = sheetData;
           this.isUpload = true;
+          uni.hideLoading();
         });
         this.analyzeData(allSheetsData);
       };
     },
     // 解析从文件得到的数据 data={Sheet1: [{姓名: "张三", ...}, ...], Sheet2: [...], Sheet3: [...], ...}
     analyzeData(data) {
-      console.log(data);
+      let tableData = [];
+      const keys = Object.keys(data);
+      keys.map((k) => {
+        tableData.push({
+          sheetName: k,
+          ...this.formatData(data[k]),
+        });
+      });
+      console.log(tableData);
+      this.tableData = tableData;
+    },
+    // 处理每个sheet的数据，返回table的columns、data
+    formatData(data) {
+      let res = {
+        has: 0,
+        columns: [],
+        data: [],
+      };
+      if (data.length) {
+        data.map((d) => {
+          const keys = Object.keys(d);
+          let keyCnt = {};
+          let row = {};
+          let columns = [];
+          keys.map((k) => {
+            let key = Pinyin.getFullChars(k);
+            if (keyCnt[key] >= 0) {
+              keyCnt[key]++;
+              key += keyCnt[key];
+            }
+            keyCnt[key] = 0;
+            columns.push({
+              key,
+              title: k,
+              align: "center",
+            });
+            row[key] = d[k];
+          });
+          res.data.push(row);
+          res.columns = columns;
+        });
+        res.has = 1;
+      }
+      return res;
     },
   },
 };
