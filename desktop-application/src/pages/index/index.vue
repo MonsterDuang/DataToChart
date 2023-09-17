@@ -1,8 +1,13 @@
 <template>
 	<div class="btn">
-		<Button v-for="item in tabs" :key="item.name" :type="item.name == active ? 'primary' : ''" style="margin-right: 10px" @click="tabsChange(item)">{{
-			item.name
-		}}</Button>
+		<Button
+			v-for="item in tabs"
+			:key="item.name"
+			:type="item.name == active ? 'primary' : 'default'"
+			style="margin-right: 10px"
+			@click="tabsChange(item)"
+			>{{ item.name }}</Button
+		>
 	</div>
 	<Excel2Chart v-if="active == 'Excel2Chart'" />
 	<Code v-if="active == 'Code'" />

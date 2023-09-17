@@ -13,6 +13,7 @@ import 'codemirror/mode/javascript/javascript.js';
 
 // 主题
 import 'codemirror/theme/idea.css';
+import 'codemirror/theme/eclipse.css';
 
 // #region 搜索功能
 // find：Ctrl-F (PC), Cmd-F (Mac)
@@ -36,6 +37,7 @@ import 'codemirror/addon/hint/show-hint.js';
 import 'codemirror/addon/hint/css-hint.js';
 import 'codemirror/addon/hint/html-hint.js';
 import 'codemirror/addon/hint/javascript-hint.js';
+import 'codemirror/addon/hint/anyword-hint.js';
 // #endregion
 
 // #region 高亮行功能
@@ -60,8 +62,8 @@ import 'codemirror/addon/edit/matchbrackets.js';
 import 'codemirror/addon/edit/closebrackets.js';
 
 // 自动插入结束标签
-// import "codemirror/addon/edit/matchtags.js";
-// import "codemirror/addon/edit/closetag.js";
+import 'codemirror/addon/edit/matchtags.js';
+import 'codemirror/addon/edit/closetag.js';
 
 // 多语言支持？
 // import 'codemirror/addon/mode/overlay'
@@ -111,7 +113,7 @@ const codemirrorOptions = reactive({
 	// 语言及语法模式
 	mode: props.mode,
 	// 主题
-	theme: 'idea',
+	theme: 'eclipse',
 	// 显示函数
 	line: false,
 	// 显示行号
@@ -131,8 +133,8 @@ const codemirrorOptions = reactive({
 	// 自动括号匹配功能
 	matchBrackets: true, //括号匹配
 	autoCloseBrackets: true, // 在键入时将自动关闭括号和引号
-	// matchTags: { bothTags: true }, //标签匹配
-	// autoCloseTags: true, // 在键入时将自动关闭标签
+	matchTags: { bothTags: true }, //标签匹配
+	autoCloseTags: true, // 在键入时将自动关闭标签
 	autofocus: true,
 	autoRefresh: true,
 	// #region 代码折叠
