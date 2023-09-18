@@ -34,8 +34,12 @@ const copyright = `Copyright © ${new Date().getFullYear()} Power By Monster`;
 </script>
 <style lang="less" scoped>
 .btn {
+	height: 59px;
 	padding: 10px;
 	border-bottom: 1px solid #e8eaec;
+	/deep/.ivu-btn {
+		height: 100%;
+	}
 }
 /deep/.ivu-global-footer {
 	margin: 0;

@@ -40,7 +40,15 @@
 							<CodeEditor :code="state.js" :fs="state.jsFs" mode="javascript" @handleInput="(code) => handleInput('js', code)" />
 						</Card>
 					</template>
-					<template #bottom></template>
+					<template #bottom>
+						<Card dis-hover :bordered="false">
+							<template #title>{{ pageTitle }}</template>
+							<template #extra>
+								<Button type="default" size="small" style="margin-right: 10px">导出</Button>
+								<Button type="primary" size="small">运行</Button>
+							</template>
+						</Card>
+					</template>
 				</Split>
 			</template>
 		</Split>
@@ -107,6 +115,8 @@ setTimeout(() => {
 const handleInput = (key, code) => {
 	state[key] = code;
 };
+
+const pageTitle = ref('Document');
 </script>
 <style lang="less" scoped>
 .codemirror {
