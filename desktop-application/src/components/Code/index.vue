@@ -1,5 +1,5 @@
 <template>
-	<div class="codemirror">
+	<view class="codemirror">
 		<Split v-model="horizontalSplit">
 			<template #left>
 				<Split v-model="leftVerticalSplit" mode="vertical">
@@ -44,15 +44,16 @@
 						<Card dis-hover :bordered="false">
 							<template #title>{{ pageTitle }}</template>
 							<template #extra>
-								<Button type="default" size="small" style="margin-right: 10px">导出</Button>
-								<Button type="primary" size="small">运行</Button>
+								<Button type="default" size="small" style="margin-right: 10px" @click="exportFile">导出</Button>
+								<Button type="primary" size="small" @click="runDemo">运行</Button>
 							</template>
+							<div ref="codeRef" v-html="code"></div>
 						</Card>
 					</template>
 				</Split>
 			</template>
 		</Split>
-	</div>
+	</view>
 </template>
 
 <script setup>
@@ -105,11 +106,16 @@ setTimeout(() => {
     <style type="text/css">{css}</style>
   </head>
   <body>
-    
-    <script type="module">{js}<\/script>
+		<div onclick="hhh()">
+			哈哈哈哈哈
+		</div>
+    <script type="text/javascript">{js}<\/script>
   </body>
 </html>`;
 	state.css = `body {}`;
+	state.js = `function hhh ( ) {
+	console.log( "hhh" )
+}`;
 }, 100);
 
 const handleInput = (key, code) => {
@@ -117,12 +123,34 @@ const handleInput = (key, code) => {
 };
 
 const pageTitle = ref('Document');
+const code = ref('');
+const codeRef = ref();
+
+const mixinCode = () => {
+	const { html, js, css } = state;
+	code.value = html.replace('{js}', js).replace('{css}', css);
+	pageTitle.value = html.match(/<title>(\S*)<\/title>/)[1];
+};
+
+const exportFile = () => {
+	mixinCode();
+};
+
+const runDemo = () => {
+	mixinCode();
+	const script = document.createElement('script');
+	script.innerHTML = state.js;
+	codeRef.value.append(script);
+};
 </script>
 <style lang="less" scoped>
 .codemirror {
 	height: calc(~'100% - 100px');
 	/deep/.bottom-pane {
 		padding-top: 6px;
+	}
+	/deep/.right-pane {
+		padding-left: 6px;
 	}
 	/deep/.ivu-card {
 		height: 100%;
