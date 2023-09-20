@@ -106,16 +106,10 @@ setTimeout(() => {
     <style type="text/css">{css}</style>
   </head>
   <body>
-		<div onclick="hhh()">
-			哈哈哈哈哈
-		</div>
     <script type="text/javascript">{js}<\/script>
   </body>
 </html>`;
 	state.css = `body {}`;
-	state.js = `function hhh ( ) {
-	console.log( "hhh" )
-}`;
 }, 100);
 
 const handleInput = (key, code) => {
