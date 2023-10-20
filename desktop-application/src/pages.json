@@ -1,17 +1,17 @@
 {
-  "pages": [
-    {
-      "path": "pages/index/index"
-    }
-  ],
-  "globalStyle": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Excel To Chart",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8",
-    "navigationStyle": "custom",
-    "app-plus": {
-      "titleView": false
-    }
-  }
+	"pages": [
+		{
+			"path": "pages/index/index"
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "Monster Tools",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom",
+		"app-plus": {
+			"titleView": false
+		}
+	}
 }

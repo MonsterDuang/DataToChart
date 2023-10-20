@@ -1,5 +1,5 @@
 {
-	"name": "excel-to-chart",
+	"name": "Monster Tools",
 	"version": "1.0.0",
 	"main": "electron/main.js",
 	"author": "Monster",
