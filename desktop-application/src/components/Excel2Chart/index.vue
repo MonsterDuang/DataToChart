@@ -6,20 +6,32 @@
 		</view>
 		<view class="content" v-else>
 			<h1 @click="isUpload = false">{{ fileName }}</h1>
-			<template v-for="item in tableData" :key="item">
+			<template v-for="(item, idx) in tableData" :key="item">
 				<Card v-if="item.has" style="margin-top: 20px" :title="item.sheetName">
+					<template #extra>
+						<Button type="primary" size="small" @click="createEcharts({ idx, ...item })">生成图表</Button>
+					</template>
 					<Table :columns="item.columns" :data="item.data"></Table>
+					<Echarts
+						v-if="echartsOptions.is && echartsOptions.idx == idx"
+						:id="echartsOptions.id"
+						:option="echartsOptions.options"
+						:style="echartsOptions.style"
+					/>
 				</Card>
 			</template>
 		</view>
+		<Setting v-model="setBol" :edata="edata" @getOptions="getOptions" />
 	</view>
 </template>
 
 <script setup>
 const app = getApp();
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import * as XLSX from 'xlsx';
 import Pinyin from 'js-pinyin';
+import Setting from './setting.vue';
+import Echarts from '../Echarts/index.vue';
 Pinyin.setOptions({ checkPolyphone: false, charCase: 1 });
 const isUpload = ref(false);
 const fileName = ref('');
@@ -107,6 +119,22 @@ const formatData = (data) => {
 		res.has = 1;
 	}
 	return res;
+};
+const setBol = ref(false);
+const edata = ref({ columns: [], data: [] });
+const createEcharts = (item) => {
+	setBol.value = true;
+	edata.value = item;
+};
+const echartsOptions = ref({ is: 0, idx: '', id: '', options: {} });
+const getOptions = (options) => {
+	console.log(options);
+	echartsOptions.value = options;
+	cancleSet();
+};
+const cancleSet = () => {
+	setBol.value = false;
+	edata.value = {};
 };
 </script>
 
