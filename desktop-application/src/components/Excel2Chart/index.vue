@@ -6,20 +6,20 @@
 		</view>
 		<view class="content" v-else>
 			<h1 @click="isUpload = false">{{ fileName }}</h1>
-			<template v-for="(item, idx) in tableData" :key="item">
-				<Card v-if="item.has" style="margin-top: 20px" :title="item.sheetName">
-					<template #extra>
-						<Button type="primary" size="small" @click="createEcharts({ idx, ...item })">生成图表</Button>
+			<Collapse simple>
+				<Panel v-for="(item, idx) in tableData" :key="item" :name="idx + ''">
+					{{ item.sheetName }}
+					<template #content>
+						<Card v-if="item.has" style="margin-top: 20px" title=" ">
+							<template #extra>
+								<Button type="primary" size="small" @click="createEcharts({ idx, ...item })">生成图表</Button>
+							</template>
+							<Table :columns="item.columns" :data="item.data"></Table>
+							<Echarts v-if="echartsOptions.is && echartsOptions.idx == idx" :id="echartsOptions.id" :option="echartsOptions.options" :style="echartsOptions.style" />
+						</Card>
 					</template>
-					<Table :columns="item.columns" :data="item.data"></Table>
-					<Echarts
-						v-if="echartsOptions.is && echartsOptions.idx == idx"
-						:id="echartsOptions.id"
-						:option="echartsOptions.options"
-						:style="echartsOptions.style"
-					/>
-				</Card>
-			</template>
+				</Panel>
+			</Collapse>
 		</view>
 		<Setting v-model="setBol" :edata="edata" @getOptions="getOptions" />
 	</view>
@@ -110,6 +110,8 @@ const formatData = (data) => {
 					key,
 					title: k,
 					align: 'center',
+					minWidth: 300,
+					tooltip: true,
 				});
 				row[key] = d[k];
 			});
@@ -138,7 +140,7 @@ const cancleSet = () => {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .empty {
 	width: 100%;
 	height: calc(~'100% - 100px');
@@ -207,6 +209,16 @@ const cancleSet = () => {
 	overflow-y: auto;
 	.content {
 		padding: 20upx;
+		.sheet-name {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
 	}
+}
+
+:deep(.ivu-collapse-header) {
+	color: #000 !important;
+	font-size: 32upx;
 }
 </style>

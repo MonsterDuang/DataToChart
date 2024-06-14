@@ -1,15 +1,5 @@
 <template>
-	<Modal
-		:title="`${props.edata.sheetName}-生成图表`"
-		draggable
-		sticky
-		scrollable
-		:loading="loading"
-		:value="props.value"
-		@on-ok="handleSuccess"
-		@on-cancel="handleCancel"
-		@on-visible-change="handleVisibleChange"
-	>
+	<Modal :title="`${props.edata.sheetName}-生成图表`" draggable sticky scrollable :loading="loading" :value="props.value" @on-ok="handleSuccess" @on-cancel="handleCancel" @on-visible-change="handleVisibleChange">
 		<Form ref="formRef" :model="formData" :rules="formRules">
 			<FormItem prop="etype" label="类型" required>
 				<Select v-model="formData.etype">
@@ -210,7 +200,7 @@ const setOptions = () => {
 						};
 					}),
 					radius: ['0%', '45%'],
-					center: ['25%', '50%'],
+					center: ['40%', '50%'],
 				},
 			],
 		};
