@@ -15,7 +15,12 @@
 								<Button type="primary" size="small" @click="createEcharts({ idx, ...item })">生成图表</Button>
 							</template>
 							<Table :columns="item.columns" :data="item.data"></Table>
-							<Echarts v-if="echartsOptions.is && echartsOptions.idx == idx" :id="echartsOptions.id" :option="echartsOptions.options" :style="echartsOptions.style" />
+							<Echarts
+								v-if="echartsOptions.is && echartsOptions.idx == idx"
+								:id="echartsOptions.id"
+								:option="echartsOptions.options"
+								:style="echartsOptions.style"
+							/>
 						</Card>
 					</template>
 				</Panel>
@@ -83,7 +88,16 @@ const analyzeData = (data) => {
 			...formatData(data[k]),
 		});
 	});
-	console.log(td);
+	const a = td[3].data
+		.map((x) => x.chapingguilei)
+		.join('、')
+		.split('、');
+	let b = {};
+	a.map((x) => {
+		if (b[x]) b[x]++;
+		else b[x] = 1;
+	});
+	console.log(a, b);
 	tableData.value = td;
 };
 // 处理每个sheet的数据，返回table的columns、data
