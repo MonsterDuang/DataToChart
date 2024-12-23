@@ -88,16 +88,6 @@ const analyzeData = (data) => {
 			...formatData(data[k]),
 		});
 	});
-	const a = td[3].data
-		.map((x) => x.chapingguilei)
-		.join('、')
-		.split('、');
-	let b = {};
-	a.map((x) => {
-		if (b[x]) b[x]++;
-		else b[x] = 1;
-	});
-	console.log(a, b);
 	tableData.value = td;
 };
 // 处理每个sheet的数据，返回table的columns、data
